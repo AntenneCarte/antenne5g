@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #1d1d1d; -webkit-text-stroke: #1d1d1d}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #1d1d1d; -webkit-text-stroke: #1d1d1d; min-height: 16.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;Carte des Antennes et Faisceaux&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta charset="utf-8" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;!-- CSS Leaflet --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#map { height: 100vh; width: 100%; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div id="map"&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;!-- JS Leaflet --&gt;</span></p>
+<p class="p1"><span class="s1">&lt;script src="https://unpkg.com/leaflet/dist/leaflet.js"&gt;&lt;/script&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// Initialiser la carte centrée sur la Suisse</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>var map = L.map('map').setView([46.8, 8.2], 8);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// Ajouter un fond OpenStreetMap</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>maxZoom: 18,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}).addTo(map);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// Fonction pour style des faisceaux selon fréquence (exemple)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>function style(feature) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var freq = feature.properties.frequency || "";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var color = 'pink';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (freq.includes('900')) color = 'orange';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>else if (freq.includes('1000')) color = 'purple';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>else if (freq.includes('3000')) color = 'blue';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>fillColor: color,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>weight: 1,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>opacity: 1,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: color,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>fillOpacity: 0.4</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// Charger le GeoJSON des faisceaux depuis le même dossier</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>fetch('antennas_beams.geojson')</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.then(response =&gt; response.json())</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.then(data =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>L.geoJSON(data, {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>style: style,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>onEachFeature: function (feature, layer) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>var freq = feature.properties.frequency || "N/A";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>var az = feature.properties.azimuth || "N/A";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>layer.bindPopup("Fréquence : " + freq + "&lt;br&gt;Azimut : " + az);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}).addTo(map);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>})</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.catch(err =&gt; console.error("Erreur chargement GeoJSON:", err));</span></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
